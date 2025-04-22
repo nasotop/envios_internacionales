@@ -12,12 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class TrackingDto {
-    public TrackingStatusType status;
+    private TrackingStatusType status;
 
-    public ShipmentInfoDto shipmentInfo;
 
-    public String currentLocation;
+    private String currentLocation;
 
-    public String trackingCode;
-
+    private String trackingCode;
 }

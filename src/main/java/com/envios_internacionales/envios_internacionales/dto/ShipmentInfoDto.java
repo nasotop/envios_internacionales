@@ -17,4 +17,6 @@ public class ShipmentInfoDto {
 
 
     public List<ShipmentContentDto> content;
+
+    public TrackingDto tracking;
 }

@@ -2,6 +2,15 @@ package com.envios_internacionales.envios_internacionales.model;
 
 import com.envios_internacionales.envios_internacionales.enums.TrackingStatusType;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,15 +20,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Entity
 public class Tracking {
 
-    public TrackingStatusType status;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
+    private Long trackingId;
 
-    public Shipment shipmentInfo;
+    private String currentLocation;
 
-    public String currentLocation;
+    private String trackingCode;
 
-    public String trackingCode;
-
-    public int shipmentId;
+    @Enumerated(EnumType.STRING)
+    private TrackingStatusType status;
+    @OneToOne
+    @JoinColumn(name = "shipmentId")
+    private Shipment shipment;
 }
