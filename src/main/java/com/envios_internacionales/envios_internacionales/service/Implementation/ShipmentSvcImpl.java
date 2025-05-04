@@ -3,14 +3,13 @@ package com.envios_internacionales.envios_internacionales.service.Implementation
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.envios_internacionales.envios_internacionales.dto.ShipmentContentDto;
 import com.envios_internacionales.envios_internacionales.dto.ShipmentInfoDto;
 import com.envios_internacionales.envios_internacionales.mapper.ShipmentMapper;
 import com.envios_internacionales.envios_internacionales.mapper.TrackingMapper;
-import com.envios_internacionales.envios_internacionales.model.Shipment;
 import com.envios_internacionales.envios_internacionales.model.ShipmentContent;
 import com.envios_internacionales.envios_internacionales.repository.ShipmentContentRepository;
 import com.envios_internacionales.envios_internacionales.repository.ShipmentRepository;
@@ -18,6 +17,7 @@ import com.envios_internacionales.envios_internacionales.service.Interface.IShip
 import com.envios_internacionales.envios_internacionales.service.Interface.ITrackingSvc;
 
 @Service
+@Transactional(readOnly = true)
 public class ShipmentSvcImpl implements IShipmentSvc {
 
     @Autowired
@@ -33,7 +33,7 @@ public class ShipmentSvcImpl implements IShipmentSvc {
         if (entities.isEmpty()) {
             throw new Exception("No se encontraron envios para mostrar");
         }
-
+        
         return ShipmentMapper.toShipmentDtos(entities);
     }
 
@@ -100,7 +100,7 @@ public class ShipmentSvcImpl implements IShipmentSvc {
         var shipmentEntity = _shipmentRepository.findById(shipmentId)
                 .orElseThrow(() -> new Exception("No se encontró un envío para el id " + shipmentId));
 
-        shipmentEntity.setShippingAddress(dto.shippingAddress);
+        shipmentEntity.setShippingAddress(dto.getShippingAddress());
 
         if (dto.getTracking() != null) {
             var trackingId = shipmentEntity.getTracking().getTrackingId();
@@ -152,10 +152,10 @@ public class ShipmentSvcImpl implements IShipmentSvc {
     }
 
     public ShipmentContentDto updateShipmentContent(ShipmentContentDto dto) throws Exception {
-        var contentEntity = _shipmentContentRepository.findById(dto.shipmentContentId)
+        var contentEntity = _shipmentContentRepository.findById(dto.getShipmentContentId())
                 .orElseThrow(
                         () -> new Exception(
-                                "No se encontró un contenido de envío para el id " + dto.shipmentContentId));
+                                "No se encontró un contenido de envío para el id " + dto.getShipmentContentId()));
 
         contentEntity.setItemsAmount(dto.getItemsAmount());
         contentEntity.setWeight(dto.getWeight());

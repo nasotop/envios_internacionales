@@ -1,6 +1,7 @@
 package com.envios_internacionales.envios_internacionales.dto;
 
 import java.util.List;
+import org.springframework.hateoas.RepresentationModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ShipmentInfoDto {
-    
-    public String shippingAddress;
+public class ShipmentInfoDto extends RepresentationModel<ShipmentInfoDto> {
 
-
-    public List<ShipmentContentDto> content;
-
-    public TrackingDto tracking;
+    private Long id;
+    private String shippingAddress;
+    private List<ShipmentContentDto> content;
+    private TrackingDto tracking;
 }

@@ -2,7 +2,6 @@ package com.envios_internacionales.envios_internacionales.model;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

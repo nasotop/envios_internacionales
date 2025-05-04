@@ -1,5 +1,7 @@
 package com.envios_internacionales.envios_internacionales.dto;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import com.envios_internacionales.envios_internacionales.enums.TrackingStatusType;
 
 import lombok.AllArgsConstructor;
@@ -11,7 +13,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TrackingDto {
+public class TrackingDto extends RepresentationModel<TrackingDto>  {
+    private Long id;
+    private Long shipmentId;
     private TrackingStatusType status;
 
 
