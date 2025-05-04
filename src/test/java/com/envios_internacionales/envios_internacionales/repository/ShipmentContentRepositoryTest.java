@@ -6,11 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
-
-import com.envios_internacionales.envios_internacionales.model.Shipment;
-import com.envios_internacionales.envios_internacionales.model.ShipmentContent;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -19,7 +14,7 @@ public class ShipmentContentRepositoryTest {
     private ShipmentContentRepository _shipmentContentRepository;
 
     @Test
-    public void getContentByShipmentIdTest() {
+    public void getContentByIdTest() {
 
         var result = _shipmentContentRepository.findById(1L);
 
