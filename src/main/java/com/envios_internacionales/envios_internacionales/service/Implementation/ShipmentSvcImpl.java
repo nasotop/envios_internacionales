@@ -118,7 +118,7 @@ public class ShipmentSvcImpl implements IShipmentSvc {
 
         return ShipmentMapper.toDto(_shipmentRepository.save(shipmentEntity));
     }
-
+    @Transactional
     public void deleteShipment(Long shipmentId) throws Exception {
         if (!_shipmentRepository.existsById(shipmentId)) {
             throw new Exception("No se encontró un envío con id " + shipmentId);
@@ -162,7 +162,7 @@ public class ShipmentSvcImpl implements IShipmentSvc {
         contentEntity.setShipmentContentId(dto.getShipmentContentId());
         return ShipmentMapper.toDto(_shipmentContentRepository.save(contentEntity));
     }
-
+    @Transactional
     public void deleteShipmentContent(Long shipmentContentId) throws Exception {
         if (!_shipmentContentRepository.existsById(shipmentContentId)) {
             throw new Exception("No se encontró un contenido con el id " + shipmentContentId);
