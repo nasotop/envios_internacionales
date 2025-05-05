@@ -1,7 +1,7 @@
 version: '3'
 services:
   app:
-    image: bill-services-app
+    image: envios-internacionales-app
     build:
       context: .
     ports:
